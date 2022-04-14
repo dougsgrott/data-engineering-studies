@@ -1,0 +1,61 @@
+
+============================================================
+BEGINNING OF AMAZON S3 BUCKET FUNCTIONALITIES DEMONSTRATION
+
+============================================================
+INGESTING DATA ON PREMISE
+Ingested data from ticker 'AMZN'
+Ingested data from ticker 'AAPL'
+Ingested data from ticker 'TSLA'
+Ingested data from ticker 'GOOG'
+Ingested data from ticker 'NFLX'
+
+============================================================
+BUCKET CREATION + VERIFICATION
+List of buckets (BEFORE): []
+Creating bucket named dms-nasdaq...
+List of buckets (AFTER): ['dms-nasdaq']
+
+============================================================
+LOCAL DATA TRANSFER TO BUCKET + VERIFICATION
+04/14/2022 17:18:58 [INFO] Bucket 'dms-nasdaq' is empty.
+List of objects in bucket (BEFORE): []
+Uploading files to bucket...
+List of objects in bucket (AFTER): ['AAPL.csv', 'AMZN.csv', 'GOOG.csv', 'NFLX.csv', 'TSLA.csv']
+
+============================================================
+OBJECT DELETION
+Deleting object ['AAPL.csv', 'AMZN.csv'] from bucket...
+Objects in bucket after single deletion: ['GOOG.csv', 'NFLX.csv', 'TSLA.csv']
+
+============================================================
+DOWNLOAD OBJECTS FROM BUCKET TO LOCAL FOLDER
+04/14/2022 17:19:12 [INFO] Downloaded GOOG.csv to ./downloaded_files//GOOG.csv
+04/14/2022 17:19:15 [INFO] Downloaded NFLX.csv to ./downloaded_files//NFLX.csv
+04/14/2022 17:19:16 [INFO] Downloaded TSLA.csv to ./downloaded_files//TSLA.csv
+
+============================================================
+GET ACCESS CONTROL LIST (ACL) OF A BUCKET
+Bucket dms-nasdaq has ACL grants: [{'Grantee': {'DisplayName': '<redacted>', 'ID': '<redacted>', 'Type': 'CanonicalUser'}, 'Permission': 'FULL_CONTROL'}].
+
+============================================================
+TESTING CORS CONFIGURATION
+Bucket dms-nasdaq has CORS rules (BEFORE ADDITION): [].
+Bucket dms-nasdaq has CORS rules (AFTER ADDITION): [{"AllowedHeaders": ["Authorization"], "AllowedMethods": ["GET", "PUT"], "AllowedOrigins": ["*"], "ExposeHeaders": ["GET", "PUT"], "MaxAgeSeconds": 3000}].
+Bucket dms-nasdaq has CORS rules (AFTER DELETION): [].
+
+============================================================
+TESTING BUCKET POLICIY CONFIGURATION
+04/14/2022 17:19:18 [ERROR] An error occurred (NoSuchBucketPolicy) when calling the GetBucketPolicy operation: The bucket policy does not exist
+Bucket dms-nasdaq has policy (BEFORE ADDITION): null.
+Bucket dms-nasdaq has policy (AFTER ADDITION): "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AddPerm\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::dms-nasdaq/*\"}]}".
+04/14/2022 17:19:19 [ERROR] An error occurred (NoSuchBucketPolicy) when calling the GetBucketPolicy operation: The bucket policy does not exist
+Bucket dms-nasdaq has policy (AFTER DELETION): null.
+
+============================================================
+DELETE BUCKET AND ALL IT'S CONTENTS
+04/14/2022 17:19:22 [INFO] Bucket 'dms-nasdaq' and all it's 3 objects were deleted.
+
+============================================================
+END OF AMAZON S3 BUCKET FUNCTIONALITIES DEMONSTRATION
+
